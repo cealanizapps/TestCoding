@@ -1,0 +1,65 @@
+//Victor's challenge
+
+var array = [2, 321, -6, 2, -83, 3, -10, 0, 453, 2]
+var window = 3
+
+//Function to make bigger product of number of window items
+func productArray(array: [Int], window: Int) -> Int {
+//    Get a sorted version of the array to use only the bigger items
+    var sortArray = array.sort()
+    print(sortArray)
+
+    print(sortArray.count)
+
+    var begin = sortArray.count-window
+    var product = 1
+
+//    Run through array to mke the product for just the number of items in the window
+    for i in begin...sortArray.count-1
+    {
+        print(sortArray[i])
+        product *= sortArray[i]
+    }
+
+    print(product)
+    return product
+}
+
+//Function to sum the number of consecutive items, equal to window
+//And see which one is the bigger
+func sumArray(array: [Int], window: Int) -> Int {
+    print(array)
+    var maxSum = 0
+    var maxArray : [Int] = []
+    var sum = 0
+    var at = array.count-window
+    
+//    Run trough array
+    for i in 0...array.count-window
+    {
+//        Run treough array on window size
+        for index in i...i+window-1 {
+            sum += array[index]
+        }
+        
+        if (sum > maxSum)
+        {
+            maxArray.removeAll()
+            for index in i...i+window-1 {
+                maxArray.append(array[index])
+            }
+            maxSum = sum
+            sum = 0
+        }
+    }
+    
+    print(maxSum)
+    print(maxArray)
+    
+    return maxSum
+}
+
+
+print(productArray(array, window: window))
+print(sumArray(array, window: window))
+
